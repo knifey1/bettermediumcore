@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "profiles": {
     "Terraria": {
@@ -13,4 +14,21 @@
       "workingDirectory": "$(tMLSteamPath)"
     }
   }
+=======
+{
+  "profiles": {
+    "Terraria": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "commandLineArgs": "$(tMLPath)",
+      "workingDirectory": "$(tMLSteamPath)"
+    },
+    "TerrariaServer": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "commandLineArgs": "$(tMLServerPath)",
+      "workingDirectory": "$(tMLSteamPath)"
+    }
+  }
+>>>>>>> 83eaaad3beb6c6117545d95766a798dcd39df2b8
 }
