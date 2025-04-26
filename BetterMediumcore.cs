@@ -51,7 +51,7 @@ namespace BetterMediumcore
         [DefaultValue(true)]
         public bool RemoveModifiers { get; set; }
         [Range(0, 100)]
-        [DefaultValue(100))]
+        [DefaultValue(100)]
         public int ModifierRemovalPercent { get; set; }
         [DefaultValue(1)]
         public int ModifierRemovals { get; set; }
