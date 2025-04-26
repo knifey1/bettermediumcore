@@ -1,186 +1,69 @@
-<<<<<<< HEAD
 Configs: {
 	BetterMediumcoreConfig: {
 		DisplayName: Better Mediumcore Config
 
-		EnableModifierRemoval: {
-			Label: Enable Modifier Removal
-			Tooltip: If enabled, all item modifiers will be removed upon respawn after death.
-		}
-
-		EnableRandomItemDeletion: {
-			Label: Enable Random Item Deletion
-			Tooltip: If enabled, there will be a 50% chance that one item that did not have a modifier at time of death will be deleted upon respawn after death.
-		}
-
-		NumItemsToRemoveModifiers: {
-			Label: Number of Items to Remove Modifiers From
-			Tooltip: Sets the number of items from which modifiers will be removed upon death. Set to 0 to disable.
-		}
-
-		FullInventoryDeletion: {
-			Label: Full Inventory Deletion
+		DropItems: {
+			Label: Drop Items Instead Of Delete
 			Tooltip: ""
 		}
 
 		DeleteArmor: {
-			Label: Delete Armor
-			Tooltip: ""
-		}
-
-		DeleteTrinkets: {
-			Label: Delete Trinkets
-			Tooltip: ""
-		}
-
-		DeleteHotbarItems: {
-			Label: Delete Hotbar Items
-			Tooltip: ""
-		}
-
-		DeleteHotbar: {
-			Label: Delete Hotbar Items
-			Tooltip: ""
-		}
-
-		DeleteNonHotbarItems: {
-			Label: Delete Non-Hotbar Non-Armor Non-Trinket Items
-			Tooltip: ""
-		}
-
-		ModifierRemovalScope: {
-			Label: Scope of Modifier Removal
-			Tooltip: ""
-		}
-
-		DeletionChance: {
-			Label: Deletion Chance
-			Tooltip: ""
-		}
-
-		ArmorPiecesToDelete: {
-			Label: Number of armor pieces (head, body, legs) to delete on death
-			Tooltip: ""
-		}
-
-		TrinketsToDelete: {
-			Label: Number of trinkets to delete on death
-			Tooltip: ""
-		}
-
-		HotbarItemsToDelete: {
-			Label: Number of hotbar items to delete on death
-			Tooltip: ""
-		}
-
-		RegularItemsToDelete: {
-			Label: Number of regular inventory items to delete on death
-			Tooltip: ""
-		}
-
-		ModifierRemovalChance: {
-			Label: Modifier Removal Chance
-			Tooltip: ""
-		}
-
-		ModifierRemovals: {
-			Label: Number of random items to lose modifiers on death
-			Tooltip: ""
-		}
-
-		Headers: {
-			ItemModifierSettings: Item Modifier Settings Header
-			DeletionChances: Deletion Chances Header
-			GeneralSettings: General Settings Header
-		}
-
-		RegularDeletionChance: {
-			Tooltip: ""
-			Label: Regular Deletion Chance
-		}
-
-		HotbarDeletionChance: {
-			Tooltip: ""
-			Label: Hotbar Deletion Chance
-		}
-
-		TrinketDeletionChance: {
-			Tooltip: ""
-			Label: Trinket Deletion Chance
-		}
-
-		ArmorDeletionChance: {
-			Tooltip: ""
-			Label: Armor Deletion Chance
-		}
-
-		Scope: {
-			Tooltip: ChooseWhichGearToDelete
-			Label: DeletionScope
-		}
-
-		DeleteEverything: {
-			Tooltip: ""
-			Label: EnableFullInventoryDeletionMode
-		}
-
-		ArmorDeleteCount: {
-			Label: Armor Delete Count
-			Tooltip: ""
-		}
-
-		TrinketDeleteCount: {
-			Label: Trinket Delete Count
-			Tooltip: ""
-		}
-
-		HotbarDeleteCount: {
-			Label: Hotbar Delete Count
-			Tooltip: ""
-		}
-
-		DeleteInventory: {
-			Label: Delete Inventory Items
-			Tooltip: ""
-		}
-
-		InventoryDeleteCount: {
-			Label: Inventory Delete Count
-			Tooltip: ""
-		}
-
-		InventoryDeletionChance: {
-			Label: Inventory Deletion Chance
+			Label: Drop/Delete Armor
 			Tooltip: ""
 		}
 
 		ArmorDeletionPercent: {
-			Label: Armor Deletion (%)
+			Label: Armor Drop/Delete Chance (%)
+			Tooltip: ""
+		}
+
+		ArmorDeleteCount: {
+			Label: Armor Drop/Delete Count
+			Tooltip: ""
+		}
+
+		DeleteTrinkets: {
+			Label: Drop/Delete Trinkets
 			Tooltip: ""
 		}
 
 		TrinketDeletionPercent: {
-			Label: Trinket Deletion (%)
+			Label: Trinket Drop/Delete Chance (%)
+			Tooltip: ""
+		}
+
+		TrinketDeleteCount: {
+			Label: Trinket Drop/Delete Count
+			Tooltip: ""
+		}
+
+		DeleteHotbar: {
+			Label: Drop/Delete Hotbar Items
 			Tooltip: ""
 		}
 
 		HotbarDeletionPercent: {
-			Label: Hotbar Deletion (%)
+			Label: Hotbar Drop/Delete Chance (%)
+			Tooltip: ""
+		}
+
+		HotbarDeleteCount: {
+			Label: Hotbar Drop/Delete Count
+			Tooltip: ""
+		}
+
+		DeleteInventory: {
+			Label: Drop/Delete Inventory Items
 			Tooltip: ""
 		}
 
 		InventoryDeletionPercent: {
-			Label: Inventory Deletion (%)
+			Label: Inventory Drop/Delete Chance (%)
 			Tooltip: ""
 		}
 
-		ModifierRemovalPercent: {
-			Label: Modifier Removal (%)
-			Tooltip: ""
-		}
-
-		DropItems: {
-			Label: Drop items instead of deleting
+		InventoryDeleteCount: {
+			Label: Inventory Drop/Delete Count
 			Tooltip: ""
 		}
 
@@ -189,208 +72,19 @@ Configs: {
 			Tooltip: ""
 		}
 
+		ModifierRemovalPercent: {
+			Label: Modifier Removal Percent
+			Tooltip: ""
+		}
+
+		ModifierRemovals: {
+			Label: Modifier Removals
+			Tooltip: ""
+		}
+
 		ShowMessages: {
 			Label: Show Messages
 			Tooltip: ""
 		}
 	}
-
-	DeletionScope: {
-		Both.Label: Both
-		InventoryOnly.Label: Inventory Only
-		ArmorOnly.Label: Armor Only
-		None.Label: None
-		Tooltip: ""
-	}
 }
-=======
-Configs: {
-	BetterMediumcoreConfig: {
-		DisplayName: Better Mediumcore Config
-
-		EnableModifierRemoval: {
-			Label: Enable Modifier Removal
-			Tooltip: If enabled, all item modifiers will be removed upon respawn after death.
-		}
-
-		EnableRandomItemDeletion: {
-			Label: Enable Random Item Deletion
-			Tooltip: If enabled, there will be a 50% chance that one item that did not have a modifier at time of death will be deleted upon respawn after death.
-		}
-
-		NumItemsToRemoveModifiers: {
-			Label: Number of Items to Remove Modifiers From
-			Tooltip: Sets the number of items from which modifiers will be removed upon death. Set to 0 to disable.
-		}
-
-		FullInventoryDeletion: {
-			Label: Full Inventory Deletion
-			Tooltip: ""
-		}
-
-		DeleteArmor: {
-			Label: Delete Armor
-			Tooltip: ""
-		}
-
-		DeleteTrinkets: {
-			Label: Delete Trinkets
-			Tooltip: ""
-		}
-
-		DeleteHotbarItems: {
-			Label: Delete Hotbar Items
-			Tooltip: ""
-		}
-
-		DeleteHotbar: {
-			Label: Delete Hotbar Items
-			Tooltip: ""
-		}
-
-		DeleteNonHotbarItems: {
-			Label: Delete Non-Hotbar Non-Armor Non-Trinket Items
-			Tooltip: ""
-		}
-
-		ModifierRemovalScope: {
-			Label: Scope of Modifier Removal
-			Tooltip: ""
-		}
-
-		DeletionChance: {
-			Label: Deletion Chance
-			Tooltip: ""
-		}
-
-		ArmorPiecesToDelete: {
-			Label: Number of armor pieces (head, body, legs) to delete on death
-			Tooltip: ""
-		}
-
-		TrinketsToDelete: {
-			Label: Number of trinkets to delete on death
-			Tooltip: ""
-		}
-
-		HotbarItemsToDelete: {
-			Label: Number of hotbar items to delete on death
-			Tooltip: ""
-		}
-
-		RegularItemsToDelete: {
-			Label: Number of regular inventory items to delete on death
-			Tooltip: ""
-		}
-
-		ModifierRemovalChance: {
-			Label: Modifier Removal Chance
-			Tooltip: ""
-		}
-
-		ModifierRemovals: {
-			Label: Number of random items to lose modifiers on death
-			Tooltip: ""
-		}
-
-		Headers: {
-			ItemModifierSettings: Item Modifier Settings Header
-			DeletionChances: Deletion Chances Header
-			GeneralSettings: General Settings Header
-		}
-
-		RegularDeletionChance: {
-			Tooltip: ""
-			Label: Regular Deletion Chance
-		}
-
-		HotbarDeletionChance: {
-			Tooltip: ""
-			Label: Hotbar Deletion Chance
-		}
-
-		TrinketDeletionChance: {
-			Tooltip: ""
-			Label: Trinket Deletion Chance
-		}
-
-		ArmorDeletionChance: {
-			Tooltip: ""
-			Label: Armor Deletion Chance
-		}
-
-		Scope: {
-			Tooltip: ChooseWhichGearToDelete
-			Label: DeletionScope
-		}
-
-		DeleteEverything: {
-			Tooltip: ""
-			Label: EnableFullInventoryDeletionMode
-		}
-
-		ArmorDeleteCount: {
-			Label: Armor Delete Count
-			Tooltip: ""
-		}
-
-		TrinketDeleteCount: {
-			Label: Trinket Delete Count
-			Tooltip: ""
-		}
-
-		HotbarDeleteCount: {
-			Label: Hotbar Delete Count
-			Tooltip: ""
-		}
-
-		DeleteInventory: {
-			Label: Delete Inventory Items
-			Tooltip: ""
-		}
-
-		InventoryDeleteCount: {
-			Label: Inventory Delete Count
-			Tooltip: ""
-		}
-
-		InventoryDeletionChance: {
-			Label: Inventory Deletion Chance
-			Tooltip: ""
-		}
-
-		ArmorDeletionPercent: {
-			Label: Armor Deletion (%)
-			Tooltip: ""
-		}
-
-		TrinketDeletionPercent: {
-			Label: Trinket Deletion (%)
-			Tooltip: ""
-		}
-
-		HotbarDeletionPercent: {
-			Label: Hotbar Deletion (%)
-			Tooltip: ""
-		}
-
-		InventoryDeletionPercent: {
-			Label: Inventory Deletion (%)
-			Tooltip: ""
-		}
-
-		ModifierRemovalPercent: {
-			Label: Modifier Removal (%)
-			Tooltip: ""
-		}
-	}
-
-	DeletionScope: {
-		Both.Label: Both
-		InventoryOnly.Label: Inventory Only
-		ArmorOnly.Label: Armor Only
-		None.Label: None
-		Tooltip: ""
-	}
-}
->>>>>>> 83eaaad3beb6c6117545d95766a798dcd39df2b8

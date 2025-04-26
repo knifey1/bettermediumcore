@@ -51,7 +51,7 @@ namespace BetterMediumcore
         [DefaultValue(true)]
         public bool RemoveModifiers { get; set; }
         [Range(0, 100)]
-        [DefaultValue(100))]
+        [DefaultValue(100)]
         public int ModifierRemovalPercent { get; set; }
         [DefaultValue(1)]
         public int ModifierRemovals { get; set; }
@@ -72,84 +72,97 @@ namespace BetterMediumcore
         public override void OnRespawn()
         {
             var cfg = ModContent.GetInstance<BetterMediumcoreConfig>();
-            var messages = new List<string>();
+            var summary = new List<string>();
 
-            if (cfg.DeleteArmor)
-                RollAndProcess("Armor", cfg.ArmorDeletionPercent,
-                    () => HandleSlots(Enumerable.Range(0, 3), cfg.ArmorDeleteCount, cfg.DropItems, true), messages);
-
-            if (cfg.DeleteTrinkets)
-                RollAndProcess("Trinkets", cfg.TrinketDeletionPercent,
-                    () => HandleSlots(Enumerable.Range(3, Player.armor.Length - 3), cfg.TrinketDeleteCount, cfg.DropItems, true), messages);
-
-            if (cfg.DeleteHotbar)
-                RollAndProcess("Hotbar", cfg.HotbarDeletionPercent,
-                    () => HandleSlots(Enumerable.Range(0, 10), cfg.HotbarDeleteCount, cfg.DropItems, false), messages);
-
-            if (cfg.DeleteInventory)
-                RollAndProcess("Inventory", cfg.InventoryDeletionPercent,
-                    () => HandleSlots(Enumerable.Range(10, Player.inventory.Length - 10), cfg.InventoryDeleteCount, cfg.DropItems, false), messages);
+            summary.AddRange(ProcessCategory("Armor", 0, 3, cfg.DeleteArmor, cfg.ArmorDeletionPercent, cfg.ArmorDeleteCount, cfg.DropItems, true));
+            summary.AddRange(ProcessCategory("Trinket", 3, Player.armor.Length - 3, cfg.DeleteTrinkets, cfg.TrinketDeletionPercent, cfg.TrinketDeleteCount, cfg.DropItems, true));
+            summary.AddRange(ProcessCategory("Hotbar item", 0, 10, cfg.DeleteHotbar, cfg.HotbarDeletionPercent, cfg.HotbarDeleteCount, cfg.DropItems, false));
+            summary.AddRange(ProcessCategory("Inventory item", 10, Player.inventory.Length - 10, cfg.DeleteInventory, cfg.InventoryDeletionPercent, cfg.InventoryDeleteCount, cfg.DropItems, false));
 
             if (cfg.RemoveModifiers)
-                RollAndProcess("Modifier Removal", cfg.ModifierRemovalPercent,
-                    () => RemoveRandomItemModifiers(cfg.ModifierRemovals), messages);
-
-            if (cfg.ShowMessages && messages.Any())
-                ShowDeletionSummary(messages);
-        }
-
-        private void RollAndProcess(string category, int percentChance, Func<int> action, List<string> messages)
-        {
-            double roll = random.NextDouble() * 100;
-            bool shouldAct = roll <= percentChance;
-            messages.Add($"[BetterMC] {category} roll: {roll:F2}% vs {percentChance}% => {(shouldAct ? "FAIL" : "PASS")}. ");
-            if (shouldAct)
             {
-                int count = action();
-                messages.Add($"[BetterMC] {category}: processed {count} item(s).");
+                var mods = RemoveModifiersList(cfg.ModifierRemovalPercent, cfg.ModifierRemovals);
+                if (mods.Any())
+                    summary.Add("Modifiers stripped from: " + string.Join(", ", mods));
             }
+
+            if (cfg.ShowMessages && summary.Any())
+                ShowSummary(summary);
         }
 
-        private int HandleSlots(IEnumerable<int> indices, int count, bool dropItems, bool isArmorSlot)
+        private IEnumerable<string> ProcessCategory(string label, int startIndex, int slotCount, bool enabled, int chance, int removeCount, bool drop, bool isArmorSlot)
         {
-            var slots = indices.Where(i => (isArmorSlot ? Player.armor[i] : Player.inventory[i])?.stack > 0).ToList();
-            int removed = 0;
-            for (int i = 0; i < count && slots.Count > 0; i++)
+            if (!enabled || random.NextDouble() * 100 > chance)
+                yield break;
+
+            var slots = Enumerable.Range(startIndex, slotCount)
+                .Where(i => (isArmorSlot ? Player.armor[i] : Player.inventory[i])?.stack > 0)
+                .ToList();
+
+            for (int i = 0; i < removeCount && slots.Count > 0; i++)
             {
                 int idx = random.Next(slots.Count);
                 int slot = slots[idx];
                 var item = isArmorSlot ? Player.armor[slot] : Player.inventory[slot];
+                string name = $"{item.Name} x{item.stack}";
 
-                if (dropItems && item.stack > 0)
+                if (drop)
                     Item.NewItem(Player.GetSource_DropAsItem(), Player.position, Player.width, Player.height, item.type, item.stack);
-
                 item.TurnToAir();
+
+                if (isArmorSlot)
+                {
+                    // Handle associated cosmetic slot and dye
+                    if (slot < Player.dye.Length && Player.dye[slot]?.stack > 0)
+                    {
+                        var dye = Player.dye[slot];
+                        if (drop)
+                            Item.NewItem(Player.GetSource_DropAsItem(), Player.position, Player.width, Player.height, dye.type, dye.stack);
+                        dye.TurnToAir();
+                    }
+                    if (slot < Player.armor.Length && Player.armor[slot + 10]?.stack > 0) // 10 offset to cosmetic armor
+                    {
+                        var cosmetic = Player.armor[slot + 10];
+                        if (drop)
+                            Item.NewItem(Player.GetSource_DropAsItem(), Player.position, Player.width, Player.height, cosmetic.type, cosmetic.stack);
+                        cosmetic.TurnToAir();
+                    }
+                }
+
                 slots.RemoveAt(idx);
-                removed++;
+                yield return $"You lost {label}: {name}";
             }
-            if (isArmorSlot) ForceRefreshAppearance();
-            return removed;
+
+            if (isArmorSlot)
+                ForceRefreshAppearance();
         }
 
-        private int RemoveRandomItemModifiers(int count)
+        private List<string> RemoveModifiersList(int chance, int count)
         {
-            var items = Player.inventory.Concat(Player.armor).Where(it => it != null && it.prefix > 0).ToList();
-            int removed = 0;
-            for (int i = 0; i < count && items.Count > 0; i++)
+            if (random.NextDouble() * 100 > chance)
+                return new List<string>();
+
+            var itemsWithPrefix = Player.inventory.Concat(Player.armor)
+                .Where(it => it != null && it.prefix > 0)
+                .ToList();
+            var names = new List<string>();
+
+            for (int i = 0; i < count && itemsWithPrefix.Count > 0; i++)
             {
-                var item = items[random.Next(items.Count)];
+                var item = itemsWithPrefix[random.Next(itemsWithPrefix.Count)];
+                names.Add(item.Name);
                 item.prefix = 0;
                 item.SetDefaults(item.type);
-                items.Remove(item);
-                removed++;
+                itemsWithPrefix.Remove(item);
             }
-            return removed;
+            return names;
         }
 
-        private void ShowDeletionSummary(List<string> messages)
+        private void ShowSummary(List<string> summary)
         {
-            foreach (var msg in messages)
-                Main.NewText(msg, Color.LightGreen);
+            Main.NewText("On death, you lost:", Color.LightGreen);
+            foreach (var line in summary)
+                Main.NewText("- " + line, Color.LightGreen);
         }
 
         private void ForceRefreshAppearance()
