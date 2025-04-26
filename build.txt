@@ -1,0 +1,3 @@
+displayName = Better Mediumcore
+author = knifey1
+version = 0.1.2
