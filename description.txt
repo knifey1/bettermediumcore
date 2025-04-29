@@ -1,100 +1,31 @@
-<<<<<<< HEAD
-BetterMediumcore: Enhanced Death Penalties
+Better Mediumcore
+Make softcore deaths a lot harsher — and more exciting!
 
-Overview
+Better Mediumcore is a lightweight Terraria mod that extends death penalties in Terraria. Instead of just dropping coins, you can now lose random items from your armor, trinkets, hotbar, and inventory on death. You can also strip modifiers from your equipment to make death sting even more.
 
-BetterMediumcore revamps Terraria's death mechanics, offering players a more challenging and customizable experience. Say goodbye to the trivial inconveniences of death and hello to meaningful consequences that make every life count. With BetterMediumcore, you control how death affects your journey through Terraria's vast world.
+Features:
 
+Configurable chances and counts for:
 
-Features
+Armor deletion
 
-Full Inventory Deletion: Upon death, lose everything. A true test of survival skills where every life matters.
-Selective Item Deletion: Customize your penalties. Choose to lose armor, trinkets, hotbar items, or non-hotbar, non-armor, non-trinket items upon death.
-Item Modifier Removal: Death can now strip your items of their modifiers, from affecting a single item to every modified item you possess. The choice is yours.
-Configurable: All features are optional and can be toggled in the mod's configuration file. Mix and match settings to create your perfect challenge.
+Trinket deletion
 
+Hotbar item deletion
 
-Configuration
+Inventory item deletion
 
-BetterMediumcore is designed with flexibility in mind. Through the mod configuration file, players can tailor their death penalties to fit their desired difficulty level. Whether you seek an unforgiving challenge or a slight increase in stakes, BetterMediumcore has you covered.
+Option to drop items or have them vanish permanently
 
+Optional removal of item modifiers (prefixes) on death
 
-Compatibility
+Post-death message showing what you lost
 
-Server-Side Configuration: Settings are server-side to ensure a consistent experience in multiplayer games.
-Mod Compatibility: BetterMediumcore is built to be compatible with most other mods. However, mods that significantly alter death mechanics may conflict.
+Full control over settings via server-side config
 
+Designed to make Terraria deaths feel more meaningful without forcing you into true mediumcore.
+Perfect for players who want higher stakes but still prefer playing softcore.
 
-Installation
+KNOWN ISSUE: Armor appearance does not refresh after death but will refresh upon reload. Currently working on this.
 
-Download BetterMediumcore from the Steam Workshop.
-Ensure you have tModLoader installed.
-Place the mod file in your Mods folder or use the in-game Mod Browser to install.
-Restart Terraria and enable BetterMediumcore from the Mods menu.
-Configure your settings via the in-game Mod Configuration menu or the config file directly.
-Embark on your adventure with new stakes!
-
-
-Feedback and Support
-
-Your feedback is invaluable! If you encounter any issues, have suggestions, or want to share your experiences, please reach out on the Steam Workshop page. We're constantly looking to improve BetterMediumcore and make it the best possible addition to your Terraria playthrough.
-
-
-Endorsement
-
-If you enjoy BetterMediumcore, please consider leaving a positive rating or review. Your support helps us continue developing and improving the mod.
-
-
-Acknowledgments
-
-=======
-BetterMediumcore: Enhanced Death Penalties
-
-Overview
-
-BetterMediumcore revamps Terraria's death mechanics, offering players a more challenging and customizable experience. Say goodbye to the trivial inconveniences of death and hello to meaningful consequences that make every life count. With BetterMediumcore, you control how death affects your journey through Terraria's vast world.
-
-
-Features
-
-Full Inventory Deletion: Upon death, lose everything. A true test of survival skills where every life matters.
-Selective Item Deletion: Customize your penalties. Choose to lose armor, trinkets, hotbar items, or non-hotbar, non-armor, non-trinket items upon death.
-Item Modifier Removal: Death can now strip your items of their modifiers, from affecting a single item to every modified item you possess. The choice is yours.
-Configurable: All features are optional and can be toggled in the mod's configuration file. Mix and match settings to create your perfect challenge.
-
-
-Configuration
-
-BetterMediumcore is designed with flexibility in mind. Through the mod configuration file, players can tailor their death penalties to fit their desired difficulty level. Whether you seek an unforgiving challenge or a slight increase in stakes, BetterMediumcore has you covered.
-
-
-Compatibility
-
-Server-Side Configuration: Settings are server-side to ensure a consistent experience in multiplayer games.
-Mod Compatibility: BetterMediumcore is built to be compatible with most other mods. However, mods that significantly alter death mechanics may conflict.
-
-
-Installation
-
-Download BetterMediumcore from the Steam Workshop.
-Ensure you have tModLoader installed.
-Place the mod file in your Mods folder or use the in-game Mod Browser to install.
-Restart Terraria and enable BetterMediumcore from the Mods menu.
-Configure your settings via the in-game Mod Configuration menu or the config file directly.
-Embark on your adventure with new stakes!
-
-
-Feedback and Support
-
-Your feedback is invaluable! If you encounter any issues, have suggestions, or want to share your experiences, please reach out on the Steam Workshop page. We're constantly looking to improve BetterMediumcore and make it the best possible addition to your Terraria playthrough.
-
-
-Endorsement
-
-If you enjoy BetterMediumcore, please consider leaving a positive rating or review. Your support helps us continue developing and improving the mod.
-
-
-Acknowledgments
-
->>>>>>> 83eaaad3beb6c6117545d95766a798dcd39df2b8
-A big thank you to the Terraria community and modding scene for their endless creativity and support. BetterMediumcore is a tribute to all of you who keep pushing the limits of what's possible in this game we all love.
+Note: This mod was created by an amateur modder. Feel free to report any issues or suggest improvements!

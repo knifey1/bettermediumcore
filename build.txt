@@ -5,4 +5,4 @@ author = knifey1
 displayName = Better Mediumcore
 author = knifey1
 >>>>>>> 83eaaad3beb6c6117545d95766a798dcd39df2b8
-version = 0.1.2
+version = 0.1.4
