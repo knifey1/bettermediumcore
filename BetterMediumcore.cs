@@ -74,10 +74,25 @@ namespace BetterMediumcore
             var cfg = ModContent.GetInstance<BetterMediumcoreConfig>();
             var summary = new List<string>();
 
-            summary.AddRange(ProcessCategory("Armor", 0, 3, cfg.DeleteArmor, cfg.ArmorDeletionPercent, cfg.ArmorDeleteCount, cfg.DropItems, true));
-            summary.AddRange(ProcessCategory("Trinket", 3, Player.armor.Length - 3, cfg.DeleteTrinkets, cfg.TrinketDeletionPercent, cfg.TrinketDeleteCount, cfg.DropItems, true));
-            summary.AddRange(ProcessCategory("Hotbar item", 0, 10, cfg.DeleteHotbar, cfg.HotbarDeletionPercent, cfg.HotbarDeleteCount, cfg.DropItems, false));
-            summary.AddRange(ProcessCategory("Inventory item", 10, Player.inventory.Length - 10, cfg.DeleteInventory, cfg.InventoryDeletionPercent, cfg.InventoryDeleteCount, cfg.DropItems, false));
+            summary.AddRange(ProcessCategory(
+                "Armor", 0, 3,
+                cfg.DeleteArmor, cfg.ArmorDeletionPercent, cfg.ArmorDeleteCount,
+                cfg.DropItems, true));
+
+            summary.AddRange(ProcessCategory(
+                "Trinket", 3, Player.armor.Length - 3,
+                cfg.DeleteTrinkets, cfg.TrinketDeletionPercent, cfg.TrinketDeleteCount,
+                cfg.DropItems, true));
+
+            summary.AddRange(ProcessCategory(
+                "Hotbar item", 0, 10,
+                cfg.DeleteHotbar, cfg.HotbarDeletionPercent, cfg.HotbarDeleteCount,
+                cfg.DropItems, false));
+
+            summary.AddRange(ProcessCategory(
+                "Inventory item", 10, Player.inventory.Length - 10,
+                cfg.DeleteInventory, cfg.InventoryDeletionPercent, cfg.InventoryDeleteCount,
+                cfg.DropItems, false));
 
             if (cfg.RemoveModifiers)
             {
@@ -90,11 +105,31 @@ namespace BetterMediumcore
                 ShowSummary(summary);
         }
 
-        private IEnumerable<string> ProcessCategory(string label, int startIndex, int slotCount, bool enabled, int chance, int removeCount, bool drop, bool isArmorSlot)
+        private IEnumerable<string> ProcessCategory(
+            string label,
+            int startIndex,
+            int slotCount,
+            bool enabled,
+            int chance,
+            int removeCount,
+            bool drop,
+            bool isArmorSlot)
         {
-            if (!enabled || random.NextDouble() * 100 > chance)
+            if (!enabled)
                 yield break;
 
+            // 1) Roll and report:
+            double roll = random.NextDouble() * 100;
+            yield return $"{label} deletion roll: {roll:F2}% (needs ≤ {chance}%)";
+
+            // 2) If roll fails, report and exit:
+            if (roll > chance)
+            {
+                yield return $"No {label} deleted.";
+                yield break;
+            }
+
+            // 3) Perform deletions:
             var slots = Enumerable.Range(startIndex, slotCount)
                 .Where(i => (isArmorSlot ? Player.armor[i] : Player.inventory[i])?.stack > 0)
                 .ToList();
@@ -107,24 +142,35 @@ namespace BetterMediumcore
                 string name = $"{item.Name} x{item.stack}";
 
                 if (drop)
-                    Item.NewItem(Player.GetSource_DropAsItem(), Player.position, Player.width, Player.height, item.type, item.stack);
+                    Item.NewItem(
+                        Player.GetSource_DropAsItem(),
+                        Player.position, Player.width, Player.height,
+                        item.type, item.stack);
+
                 item.TurnToAir();
 
                 if (isArmorSlot)
                 {
-                    // Handle associated cosmetic slot and dye
+                    // Dye slot
                     if (slot < Player.dye.Length && Player.dye[slot]?.stack > 0)
                     {
                         var dye = Player.dye[slot];
                         if (drop)
-                            Item.NewItem(Player.GetSource_DropAsItem(), Player.position, Player.width, Player.height, dye.type, dye.stack);
+                            Item.NewItem(
+                                Player.GetSource_DropAsItem(),
+                                Player.position, Player.width, Player.height,
+                                dye.type, dye.stack);
                         dye.TurnToAir();
                     }
-                    if (slot < Player.armor.Length && Player.armor[slot + 10]?.stack > 0) // 10 offset to cosmetic armor
+                    // Cosmetic armor slot
+                    if (slot + 10 < Player.armor.Length && Player.armor[slot + 10]?.stack > 0)
                     {
                         var cosmetic = Player.armor[slot + 10];
                         if (drop)
-                            Item.NewItem(Player.GetSource_DropAsItem(), Player.position, Player.width, Player.height, cosmetic.type, cosmetic.stack);
+                            Item.NewItem(
+                                Player.GetSource_DropAsItem(),
+                                Player.position, Player.width, Player.height,
+                                cosmetic.type, cosmetic.stack);
                         cosmetic.TurnToAir();
                     }
                 }
@@ -133,6 +179,7 @@ namespace BetterMediumcore
                 yield return $"You lost {label}: {name}";
             }
 
+            // 4) Refresh appearance if armor changed:
             if (isArmorSlot)
                 ForceRefreshAppearance();
         }
@@ -142,11 +189,12 @@ namespace BetterMediumcore
             if (random.NextDouble() * 100 > chance)
                 return new List<string>();
 
-            var itemsWithPrefix = Player.inventory.Concat(Player.armor)
+            var itemsWithPrefix = Player.inventory
+                .Concat(Player.armor)
                 .Where(it => it != null && it.prefix > 0)
                 .ToList();
-            var names = new List<string>();
 
+            var names = new List<string>();
             for (int i = 0; i < count && itemsWithPrefix.Count > 0; i++)
             {
                 var item = itemsWithPrefix[random.Next(itemsWithPrefix.Count)];
@@ -167,9 +215,9 @@ namespace BetterMediumcore
 
         private void ForceRefreshAppearance()
         {
-            Player.head = Player.armor[0]?.headSlot ?? 0;
-            Player.body = Player.armor[1]?.bodySlot ?? 0;
-            Player.legs = Player.armor[2]?.legSlot ?? 0;
+            Player.head  = Player.armor[0]?.headSlot ?? 0;
+            Player.body  = Player.armor[1]?.bodySlot ?? 0;
+            Player.legs  = Player.armor[2]?.legSlot  ?? 0;
             Player.invis = !Player.invis;
             Player.invis = !Player.invis;
         }
